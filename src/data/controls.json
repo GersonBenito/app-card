@@ -1,0 +1,28 @@
+{
+    "controls": [
+        {
+            "name": "firstName",
+            "label": "first name",
+            "value": "",
+            "type": "text",
+            "validators": {
+                "required": true,
+                "minLength": 10
+            }
+        },
+        {
+            "name": "lastName",
+            "label": "last name",
+            "value": "",
+            "type": "text",
+            "validators": {}
+        },
+        {
+            "name": "comments",
+            "label": "Comments",
+            "value": "",
+            "type": "textarea",
+            "validators": {}
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+   <div class="container_input" *ngFor="let control of jsonFormData">
+    <label [for]="control.name">{{ control.label }}</label>
+    <input [type]="control.type" [formControlName]="control.name">
+   </div>
+   <button type="submit">Submit</button>
+</form>

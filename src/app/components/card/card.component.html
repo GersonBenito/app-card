@@ -1,0 +1,113 @@
+<div class="container_card">
+    <div *ngFor="let pokemon of pokemons" class="pokemon">
+        <div class="name">{{pokemon.name}}</div>
+        <div class="section">
+            <div class="tabs">
+                <div 
+                    [ngClass]="{'active': section === 'stats', 'stats': section === 'evolution'}" 
+                    (click)="toggleSection('stats', pokemon.id)"
+                >
+                    Stats
+                </div>
+                <div 
+                    [ngClass]="{'active': section === 'evolution', 'evolution': section === 'stats'}" 
+                    (click)="toggleSection('evolution', pokemon.id)"
+                >
+                    Evolution
+                </div>
+            </div>
+            <ng-container 
+                *ngTemplateOutlet="section === 'stats' ? stats : evolution; context:{pokemon:pokemon}"
+            >
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+
+<!-- stats -->
+<ng-template #stats let-pokemon="pokemon">
+    <div class="section_details">
+        <ng-container *ngTemplateOutlet="sectionDetails; context:{pokemon:pokemon}"></ng-container>
+    </div>
+    <div class="section_types_hibilities">
+        <ng-container 
+            *ngTemplateOutlet="sectionTypesHabilities; context:{types:pokemon.types, abilities: pokemon.abilities}"
+        ></ng-container>
+    </div>
+    <div class="section_stats">
+        <ng-container *ngTemplateOutlet="sectionStats; context: {stats: pokemon.stats}"></ng-container>
+    </div>
+</ng-template>
+
+<!-- evolution -->
+<ng-template #evolution let-pokemon="pokemon">
+    <div class="section_evolution">
+        <div class="name_pokemon">Evolution {{ pokemon.name }}</div>
+        <div *ngFor="let evolution of pokemon.evolutions" class="section_forms">
+            <div class="form">{{ evolution.form }}</div>
+            <div class="images_details">
+                <img [src]="evolution.sprite" [alt]="evolution.name">
+                <div class="name_evolution">{{ evolution.name }}</div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<!-- section details -->
+<ng-template #sectionDetails let-details="pokemon">
+    <img [src]="details.sprites" [alt]="details.name">
+    <div class="constainer_details">
+        <div class="section_name">Biodata</div>
+        <div class="details">
+            <div class="first">
+                <div class="first_name">
+                    <p class="title">Name:</p>
+                    <p class="data">{{ details.name }}</p>
+                </div>
+                <div class="height">
+                    <p class="title">Height:</p>
+                    <p class="data">{{ details.height }}</p>
+                </div>
+                <div class="color">
+                    <p class="title">Color:</p>
+                    <p class="data">{{ details.name }}</p>
+                </div>
+            </div>
+            <div class="second">
+                <div class="habitats">
+                    <p class="title">Habitats:</p>
+                    <p class="data">{{ details.name }}</p>
+                </div>
+                <div class="weight">
+                    <p class="title">Weight:</p>
+                    <p class="data">{{ details.weight }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- section types and habilities -->
+<ng-template #sectionTypesHabilities let-types="types" let-abilities="abilities">
+    <div class="types">
+        <div class="type" *ngFor="let type of types">{{ type }}</div>
+    </div>
+    <div class="abilities">
+        <div class="abilite" *ngFor="let abilite of abilities">{{ abilite }}</div>
+    </div>
+</ng-template>
+
+<!-- section details stats -->
+<ng-template #sectionStats let-stats="stats">
+    <div class="name_section">Stats</div>
+    <div class="section_stat" *ngFor="let stat of stats">
+        <div class="name_stat">{{ stat.name }}</div>
+        <div class="progress">
+            <div class="percentage" [style.width]="stat.base_stat+'%'">
+                <span>{{ stat.base_stat }}%</span>
+            </div>
+        </div>
+    </div>
+</ng-template>
