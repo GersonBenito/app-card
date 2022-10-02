@@ -1,25 +1,15 @@
 <div class="container_card">
     <div *ngFor="let pokemon of pokemons" class="pokemon">
         <div class="name">{{pokemon.name}}</div>
-        <div class="section">
-            <div class="tabs">
-                <div 
-                    [ngClass]="{'active': section === 'stats', 'stats': section === 'evolution'}" 
-                    (click)="toggleSection('stats', pokemon.id)"
-                >
-                    Stats
-                </div>
-                <div 
-                    [ngClass]="{'active': section === 'evolution', 'evolution': section === 'stats'}" 
-                    (click)="toggleSection('evolution', pokemon.id)"
-                >
-                    Evolution
-                </div>
-            </div>
-            <ng-container 
-                *ngTemplateOutlet="section === 'stats' ? stats : evolution; context:{pokemon:pokemon}"
-            >
-            </ng-container>
+        <div class="tabs">
+            <mat-tab-group>
+                <mat-tab label="Stats">
+                    <ng-content *ngTemplateOutlet="stats; context:{pokemon:pokemon}"></ng-content>
+                </mat-tab>
+                <mat-tab label="Evolution">
+                    <ng-content *ngTemplateOutlet="evolution; context:{pokemon:pokemon}"></ng-content>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>

@@ -1,0 +1,21 @@
+<div class="container_tabs">
+    <div class="tabs" *ngFor="let pokemon of [1,2,3,4,5,6,7,8,9]">
+        <mat-tab-group>
+            <mat-tab label="Details">
+                <ng-content *ngTemplateOutlet="details"></ng-content>
+            </mat-tab>
+            <mat-tab label="Evolution">
+                <ng-content *ngTemplateOutlet="evolutions"></ng-content>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    
+    
+    <ng-template #details>
+        <h3>Details</h3>
+    </ng-template>
+    
+    <ng-template #evolutions>
+        <h3>Evolution</h3>
+    </ng-template>
+</div>

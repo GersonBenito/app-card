@@ -10,9 +10,6 @@ import { PokemonDetail } from 'src/interfaces/pokemos.interface';
 export class CardComponent implements OnInit {
 
   public pokemons: PokemonDetail[] = [];
-  public section: 'stats' | 'evolution' = 'stats';
-  public id: number | undefined = undefined;
-  // public showEvolution: boolean = true;
 
   constructor( private _pokemonService: PokemonService ) { }
 
@@ -34,16 +31,7 @@ export class CardComponent implements OnInit {
     this._pokemonService.getDatailsPokemon(url).subscribe({
       next: response =>{
         this.pokemons = response;
-        console.log(this.pokemons);
       }
     });
   }
-
-  toggleSection(section: 'stats' | 'evolution', id: number): void{
-    this.section = section;
-    this.id = id;
-    // this.showEvolution = section === 'stats'  ? true : false;
-    console.log('id -->', this.id); 
-  }
-
 }
